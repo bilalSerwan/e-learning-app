@@ -12,6 +12,19 @@ class UserController {
             res.send(result);
         };
     }
+    getuserbyemail = () => {
+        return async (req,res)=>{
+            console.log("=====================================");
+            console.log(req.body.email);
+            const email = req.body.email;
+            const result = await User.findOne({email:email});
+            if(!result){
+                res.send('this email is invalid doesn\'t exists');
+                return;
+            }
+            res.send(result);
+        }
+    }
     //add-user
     addUser = () => {
         return async (req, res) => {

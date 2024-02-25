@@ -1,4 +1,10 @@
+const {
+    string
+} = require('joi');
 const Course = require('../document_schema/course_schema');
+const {
+    search
+} = require('../routes/user.routes');
 const CourseValidation = require('../validation/course.validation');
 
 class CourseController {
@@ -30,6 +36,19 @@ class CourseController {
         }
     }
 
+    searchCourse = () => {
+        return async (req, res) => {
+            const searched = req.params.search;
+            const regulerEx = new RegExp('.*' + searched + '.*', 'i');
+            const result = await Course.find({
+                name: {
+                    $regex: regulerEx,
+                }
+            });
+            console.log(result);
+            res.send(result);
+        }
+    }
 
 }
 module.exports = new CourseController();

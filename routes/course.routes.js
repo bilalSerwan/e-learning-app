@@ -8,5 +8,5 @@ app.get('/home',CourseController.getAllCourses());
 //add-course
 app.post('/add-course',CourseController.addCourse());
 
-
+app.get('/searchcourse/:search',CourseController.searchCourse());
 module.exports= app;

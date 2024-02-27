@@ -4,14 +4,15 @@ const User = require('../document_schema/user_schema');
 class Usermodule {
 
   getUserById = async (id) => {
-    if(length(id)!=24) return " this id is wrong "; 
+    if (length(id) != 24) return " this id is wrong ";
     const result = await User.findById(id);
     if (!result) {
       return 'this id is invalid doesn\'t exists';
     }
     return result;
 
-  }
+  } //get user by id-method
+
   getUserByEmail = async (email) => {
     console.log(email);
     const result = await User.findOne({
@@ -28,16 +29,16 @@ class Usermodule {
     const result = await User.create(body);
     console.log("result ===================>" + result);
     return result
-  } //add User
+  } //add User-method
 
-  updateUser = async (id,body)=>{
+  updateUser = async (id, body) => {
     const result = await User.updateOne({
       _id: id
-  }, {
+    }, {
       $set: body
-  });
-  return result;
-  }
+    });
+    return result;
+  } //update user-method
 
 }
 

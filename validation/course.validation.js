@@ -3,7 +3,7 @@ const Joi =  require('joi');
 class CourseValidation{
    async validateCourse(data){
         const coursevalid = Joi.object({
-            name: Joi.string().min(5).max(100).required(),
+            name: Joi.string().min(5).max(100).required().trim(),
          background: Joi.string(),
          author : Joi.string().required(),
          description: Joi.string().min(5).required(),

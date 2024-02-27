@@ -18,3 +18,4 @@ class CourseModule {
         });
     }
 }
+module.exports = new CourseModule();

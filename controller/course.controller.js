@@ -16,7 +16,6 @@ class CourseController {
             const isvalid = await CourseValidation.validateCourse(body);
             if (isvalid.status) {
                 try {
-
                     res.send(await CourseModule.addCourse(body));
                 } catch (e) {
                     console.log(e);

@@ -6,11 +6,11 @@ class UserController {
     //get-user-by-id
     getUserById = () => {
         return async (req, res) => {
-            console.log();
-            if(req.body._id.length!=24) {
+            console.log(req.params.id);
+            if(req.params.id.length!=24) {
                 res.send("this id is inviled or wrong");
             return;}
-            const id = new ObjectId(req.body._id);
+            const id = new ObjectId(req.params.id);
             res.send(await userModule.getUserById(id));
         };
     }
@@ -18,8 +18,10 @@ class UserController {
     //get user by email
     getuserbyemail = () => {
         return async (req, res) => {
-            const email = req.body.email;
+            const email = req.params.email;
+            console.log(email);
             const emailValid = await userValidation.isEmailValid(email);
+            console.log("emailValid ================>");
             if(emailValid.status){
                 res.send(await userModule.getUserByEmail(email));
             }else{

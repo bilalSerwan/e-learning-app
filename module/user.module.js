@@ -1,8 +1,6 @@
+const { object } = require('joi');
 const User = require('../document_schema/user_schema');
-
-
 class Usermodule {
-
   getUserById = async (id) => {
     const result = await User.findById(id);
     if (!result) {
@@ -14,13 +12,14 @@ class Usermodule {
 
   getUserByEmail = async (email) => {
     console.log(email);
-    const result = await User.findOne({
-      email: email
+   try{ 
+      const result = await User.findOne({
+      email: object.base(email),
     });
     console.log("result =====================>" + result);
     if (!result) {
       return 'this email is invalid doesn\'t exists';
-    }
+    }}catch(ex){console.log(ex);}
     return result;
   } //getuserbyemail-method
 

@@ -2,9 +2,9 @@ const express = require('express');
 const app = express();
 const UserController = require('../controller/user.controller');
 
-app.get('/get-user',UserController.getUserById());
+app.get('/get-user-by-id/:id',UserController.getUserById());
 
-app.get('/get-user-by-email',UserController.getuserbyemail());
+app.get('/get-user-by-email/:email',UserController.getuserbyemail());
 
 app.post('/add-user',UserController.addUser());
 

@@ -24,16 +24,18 @@ class UserValidation {
     }//method
 
     async isEmailValid(email){
-        const emailValid = Joi.object({
+        const emailValid = await Joi.object({
             email : Joi.string().email().required().min(5),
         });
         const result =  emailValid.validateAsync(email);
         if (result.error) {
+            console.log("invalid=====================>");
             return {
                 status: false,
                 massage: result.error.details[0].message,
             };
         } else {
+            console.log("valid=====================>");
             return {
                 status: true
             };

@@ -3,13 +3,18 @@ const userValidation = require('../validation/user.validation');
 const userModule = require('../module/user.module');
 
 class UserController {
-    //get-user
+    //get-user-by-id
     getUserById = () => {
         return async (req, res) => {
+            console.log();
+            if(req.body._id.length!=24) {
+                res.send("this id is inviled or wrong");
+            return;}
             const id = new ObjectId(req.body._id);
             res.send(await userModule.getUserById(id));
         };
     }
+
     //get user by email
     getuserbyemail = () => {
         return async (req, res) => {
@@ -22,6 +27,7 @@ class UserController {
             }
         }
     }
+
     //add-user
     addUser = () => {
         return async (req, res) => {
@@ -39,7 +45,8 @@ class UserController {
                 res.send(userisvalid.massage);
             }
         }
-    };
+    }
+
     //update user
     updateUser = () => {
         return async (req, res) => {
@@ -57,5 +64,6 @@ class UserController {
             }
         }
     } //update-method
+
 } //class
 module.exports = new UserController();

@@ -22,6 +22,23 @@ class UserValidation {
             };
         }
     }//method
+
+    async isEmailValid(email){
+        const emailValid = Joi.object({
+            email : Joi.string().email().required().min(5),
+        });
+        const result =  emailValid.validateAsync(email);
+        if (result.error) {
+            return {
+                status: false,
+                massage: result.error.details[0].message,
+            };
+        } else {
+            return {
+                status: true
+            };
+        }
+    }
 }//class
 
 

@@ -23,5 +23,7 @@ class CourseValidation{
             };
         }
         }
+
+    
 }
 module.exports = new CourseValidation();

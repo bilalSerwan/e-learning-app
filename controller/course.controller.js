@@ -16,7 +16,7 @@ class CourseController {
             const isvalid = await CourseValidation.validateCourse(body);
             if (isvalid.status) {
                 try {
-                    
+
                     res.send(await CourseModule.addCourse(body));
                 } catch (e) {
                     console.log(e);
@@ -31,13 +31,12 @@ class CourseController {
         return async (req, res) => {
             const searched = req.params.search;
             const regulerEx = new RegExp('.*' + searched + '.*', 'i');
-            try{
-            res.send(await CourseModule.searchForCourse(regulerEx));
-            }catch(ex){
+            try {
+                res.send(await CourseModule.searchForCourse(regulerEx));
+            } catch (ex) {
                 console.log(ex);
-            } 
+            }
         }
     }
-
 }
 module.exports = new CourseController();

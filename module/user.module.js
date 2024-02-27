@@ -4,6 +4,7 @@ const User = require('../document_schema/user_schema');
 class Usermodule {
 
   getUserById = async (id) => {
+    if(length(id)!=24) return " this id is wrong "; 
     const result = await User.findById(id);
     if (!result) {
       return 'this id is invalid doesn\'t exists';

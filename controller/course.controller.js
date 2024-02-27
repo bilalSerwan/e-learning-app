@@ -1,10 +1,4 @@
-const {
-    string
-} = require('joi');
-const Course = require('../document_schema/course_schema');
-const {
-    search
-} = require('../routes/user.routes');
+const CourseModule = require('../module/course.module');
 const CourseValidation = require('../validation/course.validation');
 
 class CourseController {
@@ -12,10 +6,7 @@ class CourseController {
     //this route for home page 
     getAllCourses = () => {
         return async (req, res) => {
-            const result = await Course.find().populate('author', 'firstname lastname image').sort({
-                numberOfStudents: -1
-            });
-            res.send(result);
+            res.send(await CourseModule.getAllCourses());
         }
     }
     //add course
@@ -25,8 +16,8 @@ class CourseController {
             const isvalid = await CourseValidation.validateCourse(body);
             if (isvalid.status) {
                 try {
-                    const result = await Course.create(body);
-                    res.send(result);
+                    
+                    res.send(await CourseModule.addCourse(body));
                 } catch (e) {
                     console.log(e);
                 }
@@ -35,18 +26,16 @@ class CourseController {
             }
         }
     }
-
+    //this for search to course 
     searchCourse = () => {
         return async (req, res) => {
             const searched = req.params.search;
             const regulerEx = new RegExp('.*' + searched + '.*', 'i');
-            const result = await Course.find({
-                name: {
-                    $regex: regulerEx,
-                }
-            });
-            console.log(result);
-            res.send(result);
+            try{
+            res.send(await CourseModule.searchForCourse(regulerEx));
+            }catch(ex){
+                console.log(ex);
+            } 
         }
     }
 

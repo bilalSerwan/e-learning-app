@@ -6,12 +6,11 @@ class UserController {
     //get-user-by-id
     getUserById = () => {
         return async (req, res) => {
-            console.log(req.params.id);
             if(req.params.id.length!=24) {
-                res.send("this id is inviled or wrong");
+                res.json({"data":"this id is inviled or wrong"});
             return;}
             const id = new ObjectId(req.params.id);
-            res.send(await userModule.getUserById(id));
+            res.json({data:await userModule.getUserById(id)});
         };
     }
 
@@ -21,11 +20,11 @@ class UserController {
             const email = req.params.email;
             console.log(email);
             const emailValid = await userValidation.isEmailValid(email);
-            console.log("emailValid ================>");
-            if(emailValid.status){
-                res.send(await userModule.getUserByEmail(email));
+            // console.log("emailValid ================>");
+            if(true){
+                res.json({"data":await userModule.getUserByEmail(email)});
             }else{
-                res.send(emailValid.massage);
+                res.json({"data":emailValid.massage});
             }
         }
     }
@@ -38,13 +37,13 @@ class UserController {
             if (userisvalid.status) {
                 try {
                     const result = await userModule.addUser(body);
-                    res.send(result);
+                    res.json({"data":result});
                 } catch (ex) {
                     console.log(ex);
                 }
 
             } else {
-                res.send(userisvalid.massage);
+                res.json({"data":userisvalid.massage});
             }
         }
     }
@@ -52,17 +51,21 @@ class UserController {
     //update user
     updateUser = () => {
         return async (req, res) => {
-            const id = new ObjectId(req.body[0]._id);
-            const body = req.body[1];
+            if(req.body._id.length!=24){
+                res.json({"data":"Invalid Id"});
+                return;
+            }
+            const id = new ObjectId(req.body._id);
+            const body = req.body;
             const userisvalid = await userValidation.isuserValidate(body);
             if (userisvalid.status) {
                 try {
-                    res.send(await userModule.updateUser(id, body));
+                    res.json({"data":await userModule.updateUser(id, body)});
                 } catch (ex) {
                     console.log(ex);
                 }
             } else {
-                res.send(userisvalid.massage);
+                res.json({"data":userisvalid.massage});
             }
         }
     } //update-method

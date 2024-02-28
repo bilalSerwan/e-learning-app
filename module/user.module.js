@@ -1,6 +1,6 @@
-const { object } = require('joi');
 const User = require('../document_schema/user_schema');
 class Usermodule {
+
   getUserById = async (id) => {
     const result = await User.findById(id);
     if (!result) {
@@ -11,31 +11,40 @@ class Usermodule {
   } //get user by id-method
 
   getUserByEmail = async (email) => {
-    console.log(email);
+    let result;
    try{ 
-      const result = await User.findOne({
-      email: object.base(email),
-    });
-    console.log("result =====================>" + result);
-    if (!result) {
+       result = await User.find({email:email});
+    if (!result || result.length == 0) {
       return 'this email is invalid doesn\'t exists';
     }}catch(ex){console.log(ex);}
     return result;
   } //getuserbyemail-method
 
   addUser = async (body) => {
+    console.log("body ===================>" + body.email);
+    const searchforemail = await User.find({email:body.email});
+    if(searchforemail.length==0 || !searchforemail){
     const result = await User.create(body);
     console.log("result ===================>" + result);
     return result
+  }else{
+    return 'this email is already exists';
+  }
   } //add User-method
 
   updateUser = async (id, body) => {
-    const result = await User.updateOne({
+    const searchforemail = await User.find({email:body.email});
+    if(searchforemail.length==0 || !searchforemail){
+      const result = await User.updateOne({
       _id: id
     }, {
       $set: body
     });
     return result;
+    }else{
+      return 'this email is already exists';
+    }
+    
   } //update user-method
 
 }

@@ -6,26 +6,32 @@ class UserController {
     //get-user-by-id
     getUserById = () => {
         return async (req, res) => {
-            if(req.params.id.length!=24) {
-                res.json({"data":"this id is inviled or wrong"});
-            return;}
+            if (req.params.id.length != 24) {
+                res.json({
+                    "data": "this id is inviled or wrong"
+                });
+                return;
+            }
             const id = new ObjectId(req.params.id);
-            res.json({data:await userModule.getUserById(id)});
+            res.json({
+                data: await userModule.getUserById(id)
+            });
         };
     }
 
     //get user by email
     getuserbyemail = () => {
-        return async (req, res) => {
+        return async  (req, res) => {
+            console.log(req.params.email);
             const email = req.params.email;
             console.log(email);
             const emailValid = await userValidation.isEmailValid(email);
             // console.log("emailValid ================>");
-            if(true){
-                res.json({"data":await userModule.getUserByEmail(email)});
-            }else{
-                res.json({"data":emailValid.massage});
-            }
+            if (true) {
+                res.json({
+                    "data": await userModule.getUserByEmail(email)
+                });
+            } else {}
         }
     }
 
@@ -37,13 +43,17 @@ class UserController {
             if (userisvalid.status) {
                 try {
                     const result = await userModule.addUser(body);
-                    res.json({"data":result});
+                    res.json({
+                        "data": result
+                    });
                 } catch (ex) {
                     console.log(ex);
                 }
 
             } else {
-                res.json({"data":userisvalid.massage});
+                res.json({
+                    "data": userisvalid.massage
+                });
             }
         }
     }
@@ -51,21 +61,32 @@ class UserController {
     //update user
     updateUser = () => {
         return async (req, res) => {
-            if(req.body._id.length!=24){
-                res.json({"data":"Invalid Id"});
+            if (req.body._id.length != 24) {
+                res.json({
+                    "data": "Invalid Id"
+                });
                 return;
             }
             const id = new ObjectId(req.body._id);
             const body = req.body;
-            const userisvalid = await userValidation.isuserValidate(body);
+            const userisvalid = await userValidation.isuserValidate({
+                firstname: body.firstname,
+                lastname: body.lastname,
+                email: body.email,
+                password: body.password
+            });
             if (userisvalid.status) {
                 try {
-                    res.json({"data":await userModule.updateUser(id, body)});
+                    res.json({
+                        "data": await userModule.updateUser(id, body)
+                    });
                 } catch (ex) {
                     console.log(ex);
                 }
             } else {
-                res.json({"data":userisvalid.massage});
+                res.json({
+                    "data": userisvalid.massage
+                });
             }
         }
     } //update-method

@@ -13,7 +13,8 @@ class Usermodule {
   getUserByEmail = async (email) => {
     let result;
    try{ 
-       result = await User.find({email:email});
+       result = await User.findOne({email:email});
+       console.log(result.password);
     if (!result || result.length == 0) {
       return 'this email is invalid doesn\'t exists';
     }}catch(ex){console.log(ex);}

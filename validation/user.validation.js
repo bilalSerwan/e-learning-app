@@ -4,7 +4,6 @@ class UserValidation {
     
     isuserValidate = async function (data) {
         const uservalidate = new Joi.object({
-            _id:Joi.string().required(),
             firstname: Joi.string().required().min(1).max(25),
             lastname: Joi.string().required().min(1).max(25),
             email: Joi.string().required().min(5).max(100).email(),

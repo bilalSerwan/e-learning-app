@@ -44,8 +44,7 @@ class Usermodule {
     return result;
     }else{
       return 'this email is already exists';
-    }
-    
+    } 
   } //update user-method
 
 }

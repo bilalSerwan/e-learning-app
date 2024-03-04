@@ -14,9 +14,8 @@ class Usermodule {
     let result;
    try{ 
        result = await User.findOne({email:email});
-       console.log(result.password);
     if (!result || result.length == 0) {
-      return 'this email is invalid doesn\'t exists';
+      return false;
     }}catch(ex){console.log(ex);}
     return result;
   } //getuserbyemail-method
@@ -29,7 +28,7 @@ class Usermodule {
     console.log("result ===================>" + result);
     return result
   }else{
-    return 'this email is already exists';
+    return false;
   }
   } //add User-method
 

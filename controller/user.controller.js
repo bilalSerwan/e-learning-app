@@ -5,6 +5,7 @@ const userModule = require('../module/user.module');
 class UserController {
     //get-user-by-id
     getUserById = () => {
+        console.log("get user by id method =============>Run<============");
         return async (req, res) => {
             if (req.params.id.length != 24) {
                 res.json({
@@ -22,28 +23,52 @@ class UserController {
     //get user by email
     getuserbyemail = () => {
         return async  (req, res) => {
-            console.log(req.params.email);
+            console.log("get user by  email method =================>Run<================");
             const email = req.params.email;
-            console.log(email);
             const emailValid = await userValidation.isEmailValid(email);
-            // console.log("emailValid ================>");
-            if (true) {
+            if (emailValid.status) {
+               let  data =  await userModule.getUserByEmail(email);
+               if(data == false){
+                res.json(
+                    {
+                        "status": false,
+                        "data": "this email is inviled or wrong",
+                    }
+                )
+                return;
+               }
                 res.json({
-                    "data": await userModule.getUserByEmail(email)
+                    "status": true,
+                    "data": data,
                 });
-            } else {}
+            } else {
+                res.json(
+                    {
+                        "status": false,
+                        "data": "this email is inviled or wrong",
+                    }
+                )
+            }
         }
     }
 
     //add-user
     addUser = () => {
+        console.log("add user method =============>Run<============");
         return async (req, res) => {
-            const body = req.body;
+            const body = JSON.parse(req.body.data);
             const userisvalid = await userValidation.isuserValidate(body);
             if (userisvalid.status) {
                 try {
                     const result = await userModule.addUser(body);
+                    if(result == false){
+                        res.json({
+                            "status":false,
+                            "data": 'this email is already exsist',
+                        });
+                    }
                     res.json({
+                        "status" : true,
                         "data": result
                     });
                 } catch (ex) {
@@ -52,6 +77,7 @@ class UserController {
 
             } else {
                 res.json({
+                    "status":false,
                     "data": userisvalid.massage
                 });
             }
@@ -60,6 +86,7 @@ class UserController {
 
     //update user
     updateUser = () => {
+        console.log("updatre user method =============>Run<============");
         return async (req, res) => {
             if (req.body._id.length != 24) {
                 res.json({

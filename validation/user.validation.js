@@ -26,7 +26,7 @@ class UserValidation {
         const emailValid = await Joi.object({
             email : Joi.string().email().required().min(5),
         });
-        const result = await emailValid.validate(email);
+        const result = await emailValid.validate({"email":email});
         if (result.error) {
             return {
                 status: false,

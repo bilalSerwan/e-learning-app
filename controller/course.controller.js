@@ -5,12 +5,14 @@ class CourseController {
 
     //this route for home page 
     getAllCourses = () => {
+        console.log("get All Courses");
         return async (req, res) => {
             res.send(await CourseModule.getAllCourses());
         }
     }
     //add course
     addCourse = () => {
+        console.log("add course method =============>Run<============");
         return async (req, res) => {
             const body = req.body;
             const isvalid = await CourseValidation.validateCourse(body);
@@ -26,7 +28,8 @@ class CourseController {
         }
     }
     //this for search to course 
-    searchCourse = () => {
+    searchCourse = () => { 
+        console.log("Search Course method =============>Run<============");
         return async (req, res) => {
             const searched = req.params.search;
             const regulerEx = new RegExp('.*' + searched + '.*', 'i');
@@ -36,6 +39,6 @@ class CourseController {
                 console.log(ex);
             }
         }
-    }
+       }
 }
 module.exports = new CourseController();

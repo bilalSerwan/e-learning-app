@@ -165,7 +165,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"mathmatic\",\r\n    \"author\":\"65da2be1d73315ba29182b9a\",\r\n    \"price\":15,\r\n    \"numberOfStudents\":100,\r\n    \"description\" : \"it's a mathmatic course \",\r\n    \"videos\":[\"video1\",\"video2\",\"video3\"]\r\n}",
+							"raw": "{\r\n    \"name\":\"mathmatic 2\",\r\n    \"author\":\"65da2be1d73315ba29182b9a\",\r\n    \"price\":15,\r\n    \"backgroundImage\":\"bawarxalid\",\r\n    \"numberOfStudents\":100,\r\n    \"description\" : \"it's a mathmatic2 course \",\r\n    \"videos\":[{\r\n        \"title\":\"introduction to math1\",\r\n        \"link\":\"http://mathmatic.com\"\r\n    },\r\n    {\r\n        \"title\":\"introduction to math2\",\r\n        \"link\":\"http://mathmatic.com\"\r\n    }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -188,12 +188,33 @@
 					"response": []
 				},
 				{
+					"name": "search-for-course-by-authorid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/course/search-course-by-authorid/65da36fdb2e101cd2b9c3810",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"course",
+								"search-course-by-authorid",
+								"65da36fdb2e101cd2b9c3810"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Search-For-Course",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/course/searchcourse/flutter",
+							"raw": "http://localhost:3000/course/searchcourse/math",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -202,7 +223,58 @@
 							"path": [
 								"course",
 								"searchcourse",
-								"flutter"
+								"math"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-course-by-id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/course/delete-course-by-id/65f76030a0f900237913520b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"course",
+								"delete-course-by-id",
+								"65f76030a0f900237913520b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-course",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"statiscal\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/course/update-course-by-id/65de427c89670443300769e0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"course",
+								"update-course-by-id",
+								"65de427c89670443300769e0"
 							]
 						}
 					},

@@ -9,4 +9,8 @@ app.get('/home',CourseController.getAllCourses());
 app.post('/add-course',CourseController.addCourse());
 
 app.get('/searchcourse/:search',CourseController.searchCourse());
+
+app.get('/search-course-by-authorid/:id',CourseController.searchCourseByAuthorId());
+app.delete('/delete-course-by-id/:courseid',CourseController.deleteCourseById());
+app.put('/update-course-by-id/:courseid',CourseController.updateCourseById());
 module.exports= app;

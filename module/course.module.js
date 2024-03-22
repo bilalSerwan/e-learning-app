@@ -17,5 +17,18 @@ class CourseModule {
             }
         });
     }
+    searchForCourseByAuthorId = async (id) => {
+        return await Course.find({
+            author:id
+        });
+    }
+
+    deleteCourseById = async(courseid)=>{
+        return await Course.findByIdAndDelete(courseid);
+    }
+    updateCourseById = async(courseid,body)=>{
+        return await Course.findByIdAndUpdate(courseid,body);
+    }
+    
 }
 module.exports = new CourseModule();

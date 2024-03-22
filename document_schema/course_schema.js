@@ -16,7 +16,7 @@ const courseSchema = mongoose.Schema({
        trim : true,
    },
    videos : {
-    type : [String],
+    type : [Map],
    },
    description : {
     type : String,
@@ -35,10 +35,6 @@ const courseSchema = mongoose.Schema({
        default : 0,
        min : 0,
    },
-//    Category : {
-//     type : [String],
-//     required : true,
-//    }
 });
 
 const Course = mongoose.model('Course', courseSchema);

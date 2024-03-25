@@ -22,21 +22,21 @@ class UserController {
 
     //get user by email
     getuserbyemail = () => {
-        return async  (req, res) => {
+        return async (req, res) => {
             console.log("get user by  email method =================>Run<================");
             const email = req.params.email;
             const emailValid = await userValidation.isEmailValid(email);
             if (emailValid.status) {
-               let  data =  await userModule.getUserByEmail(email);
-               if(data == false){
-                res.json(
-                    {
-                        "status": false,
-                        "data": "this email is inviled or wrong",
-                    }
-                )
-                return;
-               }
+                let data = await userModule.getUserByEmail(email);
+                if (data == false) {
+                    res.json(
+                        {
+                            "status": false,
+                            "data": "this email is inviled or wrong",
+                        }
+                    )
+                    return;
+                }
                 res.json({
                     "status": true,
                     "data": data,
@@ -56,19 +56,20 @@ class UserController {
     addUser = () => {
         console.log("add user method =============>Run<============");
         return async (req, res) => {
-            const body = JSON.parse(req.body.data);
+            const body = JSON.parse(req.body.data);// production
+            //const body = req.body; // labo postman test(this is only for test.)
             const userisvalid = await userValidation.isuserValidate(body);
             if (userisvalid.status) {
                 try {
                     const result = await userModule.addUser(body);
-                    if(result == false){
+                    if (result == false) {
                         res.json({
-                            "status":false,
+                            "status": false,
                             "data": 'this email is already exsist',
                         });
                     }
                     res.json({
-                        "status" : true,
+                        "status": true,
                         "data": result
                     });
                 } catch (ex) {
@@ -77,7 +78,7 @@ class UserController {
 
             } else {
                 res.json({
-                    "status":false,
+                    "status": false,
                     "data": userisvalid.massage
                 });
             }

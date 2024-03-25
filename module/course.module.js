@@ -24,7 +24,7 @@ class CourseModule {
     }
 
     deleteCourseById = async(courseid)=>{
-        return await Course.findByIdAndDelete(courseid);
+       return  await Course.deleteOne({_id:courseid});
     }
     updateCourseById = async(courseid,body)=>{
         return await Course.findByIdAndUpdate(courseid,body);

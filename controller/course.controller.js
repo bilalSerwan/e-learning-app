@@ -56,6 +56,7 @@ class CourseController {
        
        deleteCourseById=()=>{
         return async (req,res)=>{
+            console.log('delete course by id'+req.params.courseid);
             if (req.params.courseid.length != 24) {
                 res.json({
                     "data": "this id is inviled or wrong"

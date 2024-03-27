@@ -21,11 +21,9 @@ class Usermodule {
   } //getuserbyemail-method
 
   addUser = async (body) => {
-    console.log("body ===================>" + body.email);
     const searchforemail = await User.find({email:body.email});
     if(searchforemail.length==0 || !searchforemail){
     const result = await User.create(body);
-    console.log("result ===================>" + result);
     return result
   }else{
     return false;

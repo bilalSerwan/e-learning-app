@@ -81,18 +81,50 @@ class CourseController {
                 return;
             }
             const courseid = new ObjectId(req.params.courseid);
-            // const body = JSON.parse (req.body.data);
-            const body = req.body;
+            const body = JSON.parse (req.body.data);
             const isvalid = await CourseValidation.validateCourseForUpdateCourse(body);
             if(isvalid.status){
             try {
-                res.send(await CourseModule.updateCourseById(courseid,body));
+                res.send({
+                    'status':isvalid.status,
+                    'data':await CourseModule.updateCourseById(courseid,body),
+                });
+            } catch (ex) {
+                
+            }
+        }else{
+            res.send(
+                {
+                    'status':isvalid.status,
+                    'data':isvalid.massage,
+                }
+            );
+        }
+        }
+       }
+
+       enrollCourse=()=>{
+        
+        return async (req,res)=>{
+            if (req.params.courseId.length != 24) {
+                res.json({
+                    "data": "this course id is inviled or wrong"
+                });
+                return;
+            }
+            if (req.params.userId.length != 24) {
+                res.json({
+                    "data": "this user id is inviled or wrong"
+                });
+                return;
+            }
+            const courseId = new ObjectId(req.params.courseId);
+            const userId = new ObjectId(req.params.userId);
+            try {
+                res.send(await CourseModule.enrollCourse(courseId,userId),);
             } catch (ex) {
                 console.log(ex);
             }
-        }else{
-            res.send(isvalid.massage);
-        }
         }
        }
 }

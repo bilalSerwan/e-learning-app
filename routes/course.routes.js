@@ -13,4 +13,5 @@ app.get('/searchcourse/:search',CourseController.searchCourse());
 app.get('/search-course-by-authorid/:id',CourseController.searchCourseByAuthorId());
 app.delete('/delete-course-by-id/:courseid',CourseController.deleteCourseById());
 app.put('/update-course-by-id/:courseid',CourseController.updateCourseById());
+app.post('/enroll-course/:courseId/:userId',CourseController.enrollCourse());
 module.exports= app;

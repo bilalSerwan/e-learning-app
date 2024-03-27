@@ -29,7 +29,12 @@ const courseSchema = mongoose.Schema({
        default : 0,
        min : 0,
    },
-
+   Students :{
+    type: [mongoose.Schema.Types.ObjectId],
+    ref:'User',
+    default :[],
+    trim:true,
+   },
    numberOfStudents : {
        type : Number,
        default : 0,

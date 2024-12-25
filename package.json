@@ -16,7 +16,7 @@
     "joi": "^17.12.2",
     "json-serve": "^0.1.0",
     "json-server": "^1.0.0-alpha.23",
-    "mongoose": "^8.2.0",
+    "mongoose": "^8.8.3",
     "nodemon": "^3.1.0"
   }
 }
